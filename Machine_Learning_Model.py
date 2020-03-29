@@ -9,6 +9,7 @@ from sklearn.naive_bayes import MultinomialNB,BernoulliNB
 from sklearn.svm import LinearSVC
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
+from sklearn.tree import DecisionTreeClassifier 
 import pickle
 import matplotlib.pyplot as plt
 import numpy as np
@@ -66,7 +67,7 @@ def main_model(X_train,y_train,train=True):
     return None
     
     '''
-    main=LinearSVC()
+    main=DecisionTreeClassifier()
     if train:
         main.fit(X_train,y_train)
 
@@ -95,14 +96,11 @@ def machine_learning_metric_testing(X_test,y_test,matrix):
 if __name__=="__main__":
     
     parser=argparse.ArgumentParser(description="Main Machine Learning Model")
-
-    parser.add_argument('-s','--UPSAMPLE',type=int,help="Upsample_number-Used same as Data_Creation.py")
-    parser.add_argument('-f','--MAX_FEATURES',type=int,help="max_features_off-Used same as Data_Creation.py")
     parser.add_argument('-t','--MATRIX',type=bool,help="Whether you want to create a confusion matrix")
     
     args=parser.parse_args()    
     
-    X,y=upsample_X_machine_learning(upsample_number=args.UPSAMPLE,max_features_off=args.MAX_FEATURES)
+    X,y,df=data_machine_learning(load=True)
     X_train, X_test, y_train, y_test=train_test_split(X,y,test_size=0.1)
     main_model(X_train,y_train,train=True)
     machine_learning_metric_testing(X_test,y_test,matrix=args.MATRIX)

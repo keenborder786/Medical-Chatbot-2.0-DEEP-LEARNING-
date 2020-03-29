@@ -140,7 +140,7 @@ def create_symptom_embedding(create_embedding,glovec_dir):
     return None
 
 
-def User_Input_symtom(user_input='My Chest Hurts',min_symptoms=5):
+def User_Input_symtom_embedding(user_input='My Chest Hurts',min_symptoms=5):
     
     ''''
     Input-User Input from chatbot interaction
@@ -195,13 +195,26 @@ def User_Input_symtom(user_input='My Chest Hurts',min_symptoms=5):
 
 
 def machine_learning_prediction(user_input):
-    L2_norms_symothoms=User_Input_symtom(user_input,min_symptoms=3)
+    '''
+    input-user intial symthoms captured from interaction with chatbot.
+    
+    Get Intial Symtoms from user and then through User_Input_symtom_embedding,
+    capture the revelant symthom.Once Captured, this function calculates the intial
+    possible dieases that the user can have.
+    
+    return intial_dieases-an array of intial dieases that user can have.
+    
+    '''
+    
+    
+    
+    L2_norms_symothoms=User_Input_symtom_embedding(user_input,min_symptoms=1)
 
     symptom_dictionary,diease_dictionary=dictionary_creation()
     _,_,df=data_machine_learning(load=True)
 
     symptom_code=[symptom_dictionary[symptom] for symptom in L2_norms_symothoms]
-    print(L2_norms_symothoms)
+   
     revelant_descriptors=[]
     for code in symptom_code:
         revelant_descriptors.append(df[(df[code]==1)].index.tolist())
@@ -211,20 +224,41 @@ def machine_learning_prediction(user_input):
     for descriptors in revelant_descriptors:
         for diease_code in descriptors:
              intial_possible_dieases.append(diease_dictionary[diease_code])
+    intial_possible_dieases=list(set(intial_possible_dieases))
     return intial_possible_dieases
 
  
-    
-####Now Moving Ahead USE LOGIC in the Paper FOUND and continue..........
-    #######Intial Dieases FOund from this function
-    ####For each diease ask for whether the symptom is present or not
-                ###Plus one score if user says yes
-                ###else zero
-    ###Diease with the highest scire from the intial search are kept
-    #############################################
 def diease_specific_detector(diease):
+    '''
+    input-Intial Diease Detected from machine_learning_prediction
+    
+    
+    This function will identify the revelant symtomps for that diease and return those
+    symtomps to user.User will tell us whether they are experiencing those symtomps or not.
+    
+    return symtomps
+    
+    
+    '''
+    
+    
+    
     symptom_dictionary,diease_dictionary=dictionary_creation()##reverse it
-    pass
+    reversed_diease_dictionary={v:k for k,v in diease_dictionary.items()}
+
+    reversed_symptom_dictionary={v:k for k,v in symptom_dictionary.items()}
+    
+    df_logic=pd.read_csv('Logic_Symtom_Data.csv')
+    df_logic=df_logic[['Diease_Code','Symptom_Code']]
+    
+    diease_code=reversed_diease_dictionary[diease]
+    revelant_symtoms=df_logic[(df_logic['Diease_Code']==diease_code)]['Symptom_Code'].values.tolist()
+    
+    symtoms=[reversed_symptom_dictionary[s_c] for s_c in revelant_symtoms]
+    
+    return symtoms
+    
+    
             
             
     
