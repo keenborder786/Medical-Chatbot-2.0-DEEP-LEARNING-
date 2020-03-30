@@ -94,17 +94,7 @@ def machine_learning_metric_testing(X_test,y_test,matrix):
 
 
 if __name__=="__main__":
-    
-    parser=argparse.ArgumentParser(description="Main Machine Learning Model")
-    parser.add_argument('-t','--MATRIX',type=bool,help="Whether you want to create a confusion matrix")
-    
-    args=parser.parse_args()    
-    
-    X,y,df=data_machine_learning(load=True)
-    X_train, X_test, y_train, y_test=train_test_split(X,y,test_size=0.1)
-    main_model(X_train,y_train,train=True)
-    machine_learning_metric_testing(X_test,y_test,matrix=args.MATRIX)
-    
+    pass
     
 
         

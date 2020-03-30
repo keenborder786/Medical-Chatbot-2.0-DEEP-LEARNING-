@@ -165,15 +165,6 @@ def upsample_X_machine_learning(upsample_number,max_features_off):
 
      
 if __name__=="__main__":
-#    
-#    parser=argparse.ArgumentParser(description="Create the Revelant DataSet for Machine Learning Model")
-#
-#    parser.add_argument('-s','--UPSAMPLE',type=int,help="Upsample_number")
-#    parser.add_argument('-f','--MAX_FEATURES',type=int,help="max_features_off")
-#
-#    args=parser.parse_args()
-#     
-#    X,y=upsample_X_machine_learning(upsample_number=args.UPSAMPLE,max_features_off=args.MAX_FEATURES)
     data_machine_learning(load=False)
 
      
