@@ -1,19 +1,22 @@
-# disease-detector-machine-learning
 
-<h1> What is this</h1>
-This is a Machine Learning Model which will be integrated with chatbot which will detect diease from the symtoms given by the user.More
-details coming soon.
-
-# How to use it?
-1-Run Data_Creation.py which will create a New-Data-Set.csv which will be given as input to the Machine Learning Model.
-
-2-Run Machine_Learning_Model.py after making sure New-Data-Set.csv in the Root Directory. This will train and test the model. The model which will be
-trained will be Bernoulli Naive Bayes Model and will be tested on test data. After test,a BernoulliNB_Performance.png file will be created in the root dir.This
-will be a confusion matrix which will reflect how many different dieases the model was able to detect.
-
-3-Finally Run User-Testing.py ,this has to be developed since this is the script which will get user data from chatbot and give the data to the trained Machine-Learning Model.
-
-4-Main Chatbot.py--Coming Soon.
+# Medical Chatbot 2.0
+## Instructions to Run
 
 
-##This Rep is in Progress-Need to Integrate Chatbot and will update Pipeline accordingly.
+1.  Go to the root directory and open the command terminal pointing to root directory.
+  
+2.	Now, open up the following website: https://nlp.stanford.edu/projects/glove/ and download glove.840B.300d.zip ,unzip it in the root directory 
+ 
+3.	Afterwards open the Command Terminal and type in:
+```
+python user_chatbot_middle.py
+```
+
+4.  This will generate a pickle file in the root directory and then run in the command terminal:
+```
+python chatbot2.0.py
+``` 
+This will run the chatbot, tell your symptoms and it will predict your disease, plus it will generate a csv file for the patient. 
+
+
+
